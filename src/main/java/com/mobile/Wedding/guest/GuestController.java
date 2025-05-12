@@ -30,19 +30,20 @@ public class GuestController {
 
     // 방명록 작성
     @GetMapping("/write")
-    public String guestCreate(@Valid Guest guest) {
+    public String guestCreate(Model model) {
+        model.addAttribute("write", new Guest()); // 필수!
         return "guestwrite";
     }
 
     @PostMapping("/write")
-    public String questionCreate(@Valid Guest guest, BindingResult bindingResult) {
+    public String questionCreate(@Valid @ModelAttribute("write") Guest guest, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()){
             return "guestwrite";
         }
 
         guestService.create(guest.getName(), guest.getPw(), guest.getTxt());
-        return "/guest"; // 질문 저장 후 /guest로 이동
+        return "redirect:/guest"; // 질문 저장 후 /guest로 이동
         // TODO 앵커포인트 설정 > 작성한 방명록 표시
     }
 

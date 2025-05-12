@@ -1,20 +1,20 @@
-<!--<html layout:decorate="~{layout}">-->
-<!--<div layout:fragment="content">-->
+<html layout:decorate="~{layout}">
+<div layout:fragment="content">
 
-<!--    <form action="@{/write}" th:object="${write}" method="post">-->
+    <form th:action="@{/write}" th:object="${write}" method="post">
 
-<!--        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">-->
-<!--            <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />-->
-<!--        </div>-->
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+            <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+        </div>
 
-<!--      <input type="text" name="name" th:field="*{name}" placeholder="이름" required />-->
+        <input type="text" th:field="*{name}" placeholder="이름" required />
 
-<!--      <input type="password" name="pw" th:field="*{pw}" placeholder="비밀번호" required />-->
+        <input type="password" th:field="*{pw}" placeholder="비밀번호" required />
 
-<!--      <textarea name="txt" placeholder="100자 이내로 작성해주세요" th:field="*{txt}" maxlength="100" required></textarea>-->
-<!--      <button type="submit">작성하기</button>-->
-<!--    </form>-->
+        <textarea th:field="*{txt}" placeholder="100자 이내로 작성해주세요" maxlength="100" required></textarea>
 
+        <button type="submit">작성하기</button>
+    </form>
 
-<!--</div>-->
-<!--</html>-->
+</div>
+</html>
