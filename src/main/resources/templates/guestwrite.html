@@ -1,18 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!--<html layout:decorate="~{layout}">-->
+<!--<div layout:fragment="content">-->
 
-<!--<form action="/guest" method="post">-->
-<!--  <input type="text" name="name" placeholder="이름" required />-->
-<!--  <input type="password" name="pw" placeholder="비밀번호" required />-->
-<!--  <textarea name="txt" placeholder="100자 이내로 작성해주세요" maxlength="100" required></textarea>-->
-<!--  <button type="submit">작성하기</button>-->
-<!--</form>-->
+<!--    <form action="@{/write}" th:object="${write}" method="post">-->
+
+<!--        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">-->
+<!--            <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />-->
+<!--        </div>-->
+
+<!--      <input type="text" name="name" th:field="*{name}" placeholder="이름" required />-->
+
+<!--      <input type="password" name="pw" th:field="*{pw}" placeholder="비밀번호" required />-->
+
+<!--      <textarea name="txt" placeholder="100자 이내로 작성해주세요" th:field="*{txt}" maxlength="100" required></textarea>-->
+<!--      <button type="submit">작성하기</button>-->
+<!--    </form>-->
 
 
-</body>
-</html>
+<!--</div>-->
+<!--</html>-->
