@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +28,29 @@ public class GuestService {
                 .build();
 
         this.guestRepository.save(guest);
+    }
+
+
+    // 삭제
+//    public boolean delete(int id, String pw) {
+//        Optional<Guest> guestOpt = guestRepository.findById(id);
+//        if (guestOpt.isPresent()) {
+//            Guest guest = guestOpt.get();
+//            if (guest.getPw().equals(pw)) {
+//                guestRepository.delete(guest);
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
+    public boolean delete(int id, String pw) {
+        Optional<Guest> guestOpt = guestRepository.findById(id);
+        if (guestOpt.isPresent() && guestOpt.get().getPw().equals(pw)) {
+            guestRepository.delete(guestOpt.get());
+            return true;
+        }
+        return false;
     }
 
 }

@@ -1,0 +1,106 @@
+<style>
+  /* 작성/삭제 공통 모달 배경 */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .modal.hidden {
+    display: none;
+  }
+
+  /* 배경 오버레이 */
+  .modal-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 60% 불투명 */
+    z-index: 1;
+  }
+
+  /* 모달 박스 공통 */
+  .modal-box {
+    position: relative;
+    z-index: 2;
+    background: #fff;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  /* 헤더 */
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .modal-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+
+  .modal-header .close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+  }
+
+  /* 입력 필드 */
+  .modal-box input,
+  .modal-box textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+  }
+
+  .modal-box textarea {
+    resize: none;
+  }
+
+  /* 버튼 공통 */
+  .submit-btn {
+    width: 100%;
+    background-color: #ffe5e5;
+    border: none;
+    padding: 12px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+
+  .submit-btn:hover {
+    background-color: #ffcfcf;
+  }
+
+  /* 에러 메시지 */
+  .error-msg {
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+</style>

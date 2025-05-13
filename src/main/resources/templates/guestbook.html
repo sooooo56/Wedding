@@ -5,11 +5,101 @@
 
     <div th:each = "guest : ${guestList}">
         <div th:text="${guest.name}"></div>
-        <div th:text="${#temporals.format(guest.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+        <div th:text="${#temporals.format(guest.createDate, 'yyyy-MM-dd')}"></div>
         <div th:text="${guest.txt}"></div>
+
+        <!-- 삭제 버튼 -->
+        <button class="delete-btn" th:attr="data-id=${guest.id}">X</button>
     </div>
 
-    <a th:href="@{/write}">답변하기</a>
+    <button id="openWriteModal">작성하기</button>
+
+    <!-- 작성 모달 -->
+    <div id="writeModal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2>방명록</h2>
+                <button class="close" data-close>&times;</button>
+            </div>
+            <form method="post" action="/write">
+                <input type="text" name="name" placeholder="이름" required />
+                <input type="password" name="pw" placeholder="비밀번호" required />
+                <textarea name="txt" rows="4" maxlength="100" placeholder="100자 이내로 작성해주세요" required></textarea>
+                <button type="submit" class="submit-btn">작성하기</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 삭제 모달 -->
+    <div id="deleteModal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2>비밀번호 확인</h2>
+                <button class="close" data-close>&times;</button>
+            </div>
+            <input type="password" id="deletePw" placeholder="비밀번호 입력" />
+            <div id="pwError" class="error-msg hidden">비밀번호가 틀렸습니다.</div>
+            <button id="confirmDelete" class="submit-btn">확인</button>
+        </div>
+    </div>
+
+
+    <!-- 삭제 모달 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          // 유틸: 모달 열고 닫기
+          function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+          }
+
+          function closeModal(el) {
+            el.closest('.modal').classList.add('hidden');
+          }
+
+          // 모든 닫기 버튼에 이벤트 바인딩
+          document.querySelectorAll('[data-close]').forEach(btn => {
+            btn.addEventListener('click', () => closeModal(btn));
+          });
+
+          // 작성하기 모달 열기
+          document.getElementById('openWriteModal').addEventListener('click', () => {
+            openModal('writeModal');
+          });
+
+          // 삭제 관련
+          let currentDeleteId = null;
+
+          document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              currentDeleteId = btn.dataset.id;
+              document.getElementById('deletePw').value = '';
+              document.getElementById('pwError').classList.add('hidden');
+              openModal('deleteModal');
+            });
+          });
+
+          document.getElementById('confirmDelete').addEventListener('click', async () => {
+            const pw = document.getElementById('deletePw').value;
+            const res = await fetch('/guest/delete', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ id: currentDeleteId, pw })
+            });
+
+            const result = await res.json();
+
+            if (result.success) {
+              document.querySelector(`[data-id='${currentDeleteId}']`).closest('div').remove();
+              closeModal(document.getElementById('deleteModal'));
+            } else {
+              document.getElementById('pwError').classList.remove('hidden');
+            }
+          });
+        });
+    </script>
+
 
 </div>
 </html>
