@@ -3,47 +3,58 @@
 <div layout:fragment="content">
 
 
-    <div th:each = "guest : ${guestList}">
-        <div th:text="${guest.name}"></div>
-        <div th:text="${#temporals.format(guest.createDate, 'yyyy-MM-dd')}"></div>
-        <div th:text="${guest.txt}"></div>
+    <div class="guest-container">
 
-        <!-- 삭제 버튼 -->
-        <button class="delete-btn" th:attr="data-id=${guest.id}">X</button>
-    </div>
+        <!-- 방명록 리스트 (최대 4개) -->
+        <div class="guest-list">
+            <div th:each="guest, iterStat : ${guestList}" th:if="${iterStat.count <= 4}" class="guest-item">
+                <div class="guest-name" th:text="${guest.name}"></div>
+                <div class="guest-date" th:text="${#temporals.format(guest.createDate, 'yyyy-MM-dd')}"></div>
+                <div class="guest-text" th:text="${guest.txt}"></div>
 
-    <button id="openWriteModal">작성하기</button>
-
-    <!-- 작성 모달 -->
-    <div id="writeModal" class="modal hidden">
-        <div class="modal-overlay"></div>
-        <div class="modal-box">
-            <div class="modal-header">
-                <h2>방명록</h2>
-                <button class="close" data-close>&times;</button>
+                <button class="delete-btn" th:attr="data-id=${guest.id}">X</button>
             </div>
-            <form method="post" action="/write">
-                <input type="text" name="name" placeholder="이름" required />
-                <input type="password" name="pw" placeholder="비밀번호" required />
-                <textarea name="txt" rows="4" maxlength="100" placeholder="100자 이내로 작성해주세요" required></textarea>
-                <button type="submit" class="submit-btn">작성하기</button>
-            </form>
         </div>
+
+        <div class="more-link">
+            <a href="/guest?page=2">더보기</a>
+        </div>
+
+        <button id="openWriteModal" class="write-btn">작성하기</button>
+
+        <!-- 작성 모달 -->
+        <div id="writeModal" class="modal hidden">
+            <div class="modal-overlay"></div>
+            <div class="modal-box">
+                <div class="modal-header">
+                    <h2>방명록 작성</h2>
+                    <button class="close" data-close>&times;</button>
+                </div>
+                <form method="post" action="/write" class="modal-form">
+                    <input type="text" name="name" placeholder="이름" required />
+                    <input type="password" name="pw" placeholder="비밀번호" required />
+                    <textarea name="txt" rows="4" maxlength="100" placeholder="100자 이내로 작성해주세요" required></textarea>
+                    <button type="submit">작성하기</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 삭제 모달 -->
+        <div id="deleteModal" class="modal hidden">
+            <div class="modal-overlay"></div>
+            <div class="modal-box">
+                <div class="modal-header">
+                    <h2>비밀번호 확인</h2>
+                    <button class="close" data-close>&times;</button>
+                </div>
+                <input type="password" id="deletePw" placeholder="비밀번호 입력" />
+                <div id="pwError" class="error-msg hidden">비밀번호가 틀렸습니다.</div>
+                <button id="confirmDelete">확인</button>
+            </div>
+        </div>
+
     </div>
 
-    <!-- 삭제 모달 -->
-    <div id="deleteModal" class="modal hidden">
-        <div class="modal-overlay"></div>
-        <div class="modal-box">
-            <div class="modal-header">
-                <h2>비밀번호 확인</h2>
-                <button class="close" data-close>&times;</button>
-            </div>
-            <input type="password" id="deletePw" placeholder="비밀번호 입력" />
-            <div id="pwError" class="error-msg hidden">비밀번호가 틀렸습니다.</div>
-            <button id="confirmDelete" class="submit-btn">확인</button>
-        </div>
-    </div>
 
 
     <!-- 삭제 모달 -->
