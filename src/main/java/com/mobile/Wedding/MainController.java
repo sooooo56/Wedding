@@ -16,4 +16,9 @@ public class MainController {
         return "redirect:/SeojunHaeun";
     }
 
+    @GetMapping("/account")
+    public String account(){
+        return "account";
+    }
+
 }

@@ -7,7 +7,7 @@
 
         <!-- 방명록 리스트 (최대 4개) -->
         <div class="guest-list">
-            <div th:each="guest, iterStat : ${guestList}" th:if="${iterStat.count <= 4}" class="guest-item">
+            <div th:each="guest : ${guestList}" class="guest-item">
                 <div class="guest-name" th:text="${guest.name}"></div>
                 <div class="guest-date" th:text="${#temporals.format(guest.createDate, 'yyyy-MM-dd')}"></div>
                 <div class="guest-text" th:text="${guest.txt}"></div>
@@ -16,8 +16,28 @@
             </div>
         </div>
 
-        <div class="more-link">
-            <a href="/guest?page=2">더보기</a>
+        <!-- 페이징 -->
+        <div class="pagination">
+            <ul>
+                <li th:if="${startPage > 1}">
+                    <a th:href="@{/guest(page=1)}">처음</a>
+                </li>
+                <li th:if="${currentPage > 1}">
+                    <a th:href="@{/guest(page=${currentPage - 1})}">이전</a>
+                </li>
+
+                <li th:each="pageNum : ${#numbers.sequence(startPage, endPage)}"
+                    th:classappend="${pageNum == currentPage} ? 'active'">
+                    <a th:href="@{/guest(page=${pageNum})}" th:text="${pageNum}">1</a>
+                </li>
+
+                <li th:if="${currentPage < totalPages}">
+                    <a th:href="@{/guest(page=${currentPage + 1})}">다음</a>
+                </li>
+                <li th:if="${endPage < totalPages}">
+                    <a th:href="@{/guest(page=${totalPages})}">끝</a>
+                </li>
+            </ul>
         </div>
 
         <button id="openWriteModal" class="write-btn">작성하기</button>

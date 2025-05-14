@@ -1,6 +1,8 @@
 package com.mobile.Wedding.guest;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -51,6 +53,10 @@ public class GuestService {
             return true;
         }
         return false;
+    }
+
+    public Page<Guest> getPageList(Pageable pageable) {
+        return guestRepository.findAllByOrderByCreateDateDesc(pageable);
     }
 
 }
