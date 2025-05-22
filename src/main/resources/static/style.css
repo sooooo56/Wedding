@@ -9,8 +9,8 @@ body{
   .guest-container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 16px;
-    font-family: sans-serif;
+    background-color: #FFF3F3;
+    padding: 50px 20px;
   }
 
   .guest-list {
@@ -22,7 +22,6 @@ body{
   .guest-item {
     position: relative;
     padding: 16px;
-    border: 1px solid #ccc;
     border-radius: 8px;
     background: #fff;
   }
@@ -44,11 +43,9 @@ body{
 
   .delete-btn {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    background: none;
-    border: none;
-    color: #d33;
+    top: 10px;
+    right: 20px;
+    color: #bfbfbf;
     font-size: 18px;
     cursor: pointer;
   }
@@ -56,21 +53,15 @@ body{
   /* 버튼 */
   .write-btn {
     margin-top: 24px;
-    padding: 10px 20px;
-    background-color: #0077cc;
-    color: #fff;
+    padding: 10px 50px;
+    background-color: #FFE0DD;
     border: none;
-    border-radius: 6px;
-    cursor: pointer;
+    border-radius: 50px;
+    font-weight: 500;
   }
 
-  .write-btn:hover {
-    background-color: #005fa3;
-  }
 
-  /* ───────────────────────────────
-    ✅ 공통 모달 스타일
-  ─────────────────────────────── */
+  /* 공통 모달 스타일 */
 
   .modal {
     position: fixed;
@@ -88,7 +79,7 @@ body{
   .modal-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6); /* ✅ 배경에 검정색 60% 오퍼시티 */
+    background: rgba(0, 0, 0, 0.6);
     z-index: 1;
   }
 
@@ -103,9 +94,7 @@ body{
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   }
 
-  /* ───────────────────────────────
-    ✅ 모달 헤더 (공통)
-  ─────────────────────────────── */
+  /*  모달 헤더 (공통)*/
   .modal-header {
     display: flex;
     justify-content: space-between;
@@ -128,9 +117,7 @@ body{
     color: #444;
   }
 
-  /* ───────────────────────────────
-    ✅ [1] 작성하기 모달 스타일
-  ─────────────────────────────── */
+  /*  [1] 작성하기 모달 스타일 */
   #writeModal .modal-form {
     padding: 16px;
     display: flex;
@@ -156,7 +143,7 @@ body{
 
   #writeModal .modal-form button[type="submit"] {
     margin-top: 12px;
-    background-color: #ffecec;
+    background-color: #FFE8E8;
     color: #000;
     font-weight: bold;
     padding: 12px;
@@ -171,13 +158,7 @@ body{
   }
 
 
-  /* ───────────────────────────────
-    ✅ [2] 삭제(비밀번호 확인) 모달 스타일
-       > 작성 모달 디자인을 기반으로 동일하게 구성
-  ─────────────────────────────── */
-  #deleteModal .modal-box {
-    /* 재사용이므로 별도 지정 없이 동일 박스 사용 */
-  }
+  /* [2] 삭제(비밀번호 확인) 모달 스타일 */
 
   #deleteModal .modal-header {
     /* 재사용이므로 별도 지정 없이 동일 */
@@ -201,7 +182,7 @@ body{
 
   #deleteModal #confirmDelete {
     width: 100%;
-    background-color: #ffecec;
+    background-color: #FFE8E8;
     color: #000;
     font-weight: bold;
     padding: 12px;
@@ -225,3 +206,82 @@ body{
     text-decoration: underline;
   }
 
+.pagination{
+    justify-content: center;
+}
+
+.pageNum{
+    display: flex;
+}
+
+.pageNum li{
+    padding: 10px;
+}
+
+/* 계좌 */
+.accordion {
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.accordion-header {
+  background: #ffe6ea;
+  padding: 14px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+
+.accordion-content {
+  display: none;
+  padding: 16px;
+  background: #fff;
+  border-top: 1px solid #eee;
+}
+
+.account-item {
+  margin-bottom: 12px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.account-item:last-child {
+  border-bottom: none;
+}
+
+.copy-btn,
+.pay-btn {
+  margin-top: 4px;
+  margin-right: 8px;
+  padding: 4px 8px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.copy-btn {
+  background: #f0f0f0;
+}
+
+.pay-btn {
+  background: #ffdd00;
+  font-weight: bold;
+}
+
+
+.bankName{
+    font-weight: 300;
+    color:#686868;
+}
+
+.DepositorName{
+    padding-top: 10px;
+}

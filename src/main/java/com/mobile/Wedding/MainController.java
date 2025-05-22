@@ -21,4 +21,9 @@ public class MainController {
         return "account";
     }
 
+    @GetMapping("/date")
+    public String date(){
+        return "date";
+    }
+
 }
