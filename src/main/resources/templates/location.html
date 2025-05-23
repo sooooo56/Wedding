@@ -44,18 +44,29 @@
           margin-top: 40px;
         }
     </style>
-    <!-- ✅ 카카오 지도 SDK -->
+    <!--카카오 지도 SDK -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=여기에_카카오_API_키를_입력하세요"></script>
-    </head>
-    <body>
 
     <h2>Location</h2>
     <p>시그니엘 서울<br>서울 송파구 올림픽로 300</p>
 
-    <!-- ✅ 카카오 지도 -->
-    <div id="map"></div>
+    <!--  지도 -->
+    <!-- * 카카오맵 - 지도퍼가기 -->
+    <!-- 1. 지도 노드 -->
+    <div id="daumRoughmapContainer1748006199407" class="root_daum_roughmap root_daum_roughmap_landing" style="margin:0 auto"></div>
+    <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 
-    <!-- ✅ 네이버지도 / 카카오맵 버튼 -->
+    <!-- 3. 실행 스크립트 -->
+    <script charset="UTF-8">
+        new daum.roughmap.Lander({
+            "timestamp" : "1748006199407",
+            "key" : "2o5gw",
+            "mapWidth" : "640",
+            "mapHeight" : "420"
+        }).render();
+    </script>
+
+    <!--  네이버지도 / 카카오맵 버튼 -->
     <div class="map-buttons">
         <a href="https://map.naver.com/v5/search/시그니엘서울" target="_blank">
             <img src="네이버아이콘.png" alt="네이버지도 아이콘"> 네이버지도
@@ -65,7 +76,7 @@
         </a>
     </div>
 
-    <!-- ✅ 교통 안내 -->
+    <!-- 교통 안내 -->
     <div>
         <div class="section-title">지하철</div>
         <p>2호선 잠실역 1번 출구 도보 2분</p>
@@ -77,7 +88,7 @@
         <p>네비게이션에 “시그니엘 서울” 또는 “롯데월드타워” 검색</p>
     </div>
 
-    <!-- ✅ 지도 스크립트 -->
+    <!-- 지도 스크립트 -->
     <script>
         var container = document.getElementById('map');
         var options = {
@@ -91,7 +102,8 @@
           position: new kakao.maps.LatLng(37.513068, 127.102491),
           map: map
         });
-    </script>
 
+
+    </script>
 </div>
 </html>

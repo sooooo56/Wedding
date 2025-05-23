@@ -27,13 +27,14 @@ body{
   }
 
   .guest-name {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
   }
 
   .guest-date {
     font-size: 12px;
     color: #888;
+    padding-right:10px;
   }
 
   .guest-text {
@@ -42,13 +43,22 @@ body{
   }
 
   .delete-btn {
-    position: absolute;
-    top: 10px;
-    right: 20px;
     color: #bfbfbf;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
   }
+
+  .guestTxt{
+    display : flex;
+    justify-content: space-between;
+  }
+
+.guestTxt2{
+    display: flex;
+    align-items: center;
+}
+
+
 
   /* 버튼 */
   .write-btn {

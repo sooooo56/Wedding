@@ -8,11 +8,16 @@
         <!-- 방명록 리스트 (최대 4개) -->
         <div class="guest-list">
             <div th:each="guest : ${guestList}" class="guest-item">
-                <div class="guest-name" th:text="${guest.name}"></div>
-                <div class="guest-date" th:text="${#temporals.format(guest.createDate, 'yyyy-MM-dd')}"></div>
+                <div class="guestTxt">
+                    <div class="guest-name" th:text="${guest.name}"></div>
+                    <div class="guestTxt2">
+                        <div class="guest-date" th:text="${#temporals.format(guest.createDate, 'yyyy-MM-dd')}"></div>
+                        <button class="delete-btn" th:attr="data-id=${guest.id}">X</button>
+                    </div>
+                </div>
                 <div class="guest-text" th:text="${guest.txt}"></div>
 
-                <button class="delete-btn" th:attr="data-id=${guest.id}">X</button>
+
             </div>
         </div>
 
