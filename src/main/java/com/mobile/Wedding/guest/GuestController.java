@@ -40,7 +40,7 @@ public class GuestController {
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
 
-        return "guestbook";
+        return "/components/guestbook";
     }
 
     // 방명록 작성

@@ -1,12 +1,12 @@
 
 <html layout:decorate="~{layout}">
-<div layout:fragment="content">
+<div layout:fragment="content" class="main-container">
 
-    <div class="container">
+    <div class="container mg-50">
         <div class="title">Seojun & Haeun</div>
         <div>이미지</div>
-        <div>2025.05.17</div>
-        <div>김서준    |    이하은</div>
+        <div class="date">2025.07.26</div>
+        <div class="name">김서준    |    이하은</div>
 
         <div class="mainTxt">
             <p>두 사람이 꽃과 나무처럼 걸어와서</p>
@@ -18,21 +18,51 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="Invite-container mg-50">
         <div class="title">Invite</div>
-
-        <p>햇살처럼 따뜻하게 안아줄 수 있는</p>
-        <p>늘 곁에서 서로를 웃게 해줄 수 있는</p>
-        <p>소중한 사람을 만났습니다.</p>
-        <br>
-        <p>햇살 가득한 5월</p>
-        <p>결혼합니다.</p>
-        <br>
-        <p>기쁜 날, 가까이서 축복해 주시면</p>
-        <p>더없는 기쁨으로 간직하겠습니다.</p>
+        <div class="mainTxt">
+            <p>햇살처럼 따뜻하게 안아줄 수 있는</p>
+            <p>늘 곁에서 서로를 웃게 해줄 수 있는</p>
+            <p>소중한 사람을 만났습니다.</p>
+            <br>
+            <p>햇살 가득한 7월</p>
+            <p>결혼합니다.</p>
+            <br>
+            <p>기쁜 날, 가까이서 축복해 주시면</p>
+            <p>더없는 기쁨으로 간직하겠습니다.</p>
+        </div>
     </div>
 
 
+
+    <style>
+        .mg-50{
+            margin: 50px 0;
+        }
+        .main-container{
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            font-family: 'Chosunilbo_myungjo';
+            font-weight: normal;
+        }
+
+        .title{
+          font-family: "Italianno", cursive;
+          font-weight: 400;
+          font-style: normal;
+          font-size: 40px;
+        }
+
+        .date{
+            font-size: 30px;
+            margin-top: 30px;
+        }
+
+        .name{
+            margin-bottom: 30px;
+        }
+    </style>
 
     <a th:href="@{/write}">답변하기</a>
     <a th:href="@{/guest}">guestbook</a>

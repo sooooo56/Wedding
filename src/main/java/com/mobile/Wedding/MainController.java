@@ -16,19 +16,4 @@ public class MainController {
         return "redirect:/SeojunHaeun";
     }
 
-    @GetMapping("/account")
-    public String account(){
-        return "account";
-    }
-
-    @GetMapping("/location")
-    public String location(){
-        return "location";
-    }
-
-    @GetMapping("/call")
-    public String call(){
-        return "call";
-    }
-
 }
