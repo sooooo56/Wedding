@@ -1,0 +1,185 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content">
+
+
+<div class="con-body">
+    <div>결혼사진</div>
+    <div>
+        <div>김OO의 • 나OO의 아들 김서준</div>
+        <div>이OO의 • 박OO의 딸     이하은</div>
+    </div>
+    <!-- 연락하기 버튼 -->
+    <button id="contactBtn" class="contact-button">연락하기</button>
+</div>
+
+<!-- 연락 모달 -->
+<div id="contactModal" class="modal">
+    <div class="modal-content">
+        <h3 class="call-title">연락하기</h3>
+        <ul class="call-list">
+            <li class="call-inner">
+                <div>신랑 김서준</div>
+                <div>
+                    <a href="tel:01000000000">📞</a>
+                    <a href="sms:01000000000">✉️</a>
+                </div>
+            </li>
+            <li class="call-inner">
+                <div>신랑 아버지 김OO</div>
+                <div>
+                    <a href="tel:01000000000">📞</a>
+                    <a href="sms:01000000000">✉️</a>
+                </div>
+            </li>
+            <li class="call-inner">
+                <div>신랑 어머니 나OO</div>
+                <div>
+                    <a href="tel:01000000000">📞</a>
+                    <a href="sms:01000000000">✉️</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="line"></div>
+
+        <ul class="call-list">
+            <li class="call-inner">
+                <div>신부 이하은</div>
+                <div>
+                    <a href="tel:01000000000">📞</a>
+                    <a href="sms:01000000000">✉️</a>
+                </div>
+            </li>
+            <li class="call-inner">
+                <div>신부 아버지 이OO</div>
+                <div>
+                    <a href="tel:01000000000">📞</a>
+                    <a href="sms:01000000000">✉️</a>
+                </div>
+            </li>
+            <li class="call-inner">
+                <div>신부 어미니 박OO</div>
+                <div>
+                    <a href="tel:01000000000">📞</a>
+                    <a href="sms:01000000000">✉️</a>
+                </div>
+            </li>
+        </ul>
+        <button class="close-btn" onclick="closeModal()">닫기</button>
+    </div>
+</div>
+
+<!-- 스타일 -->
+<style>
+
+    .con-body{
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* 어두운 배경 */
+      transition: all 0.3s ease;
+    }
+
+    .modal-content {
+      margin: 100px auto;
+      width: 320px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* 부드러운 그림자 */
+      font-family: 'Pretendard', sans-serif;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+
+    .call-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      padding: 10px 20px;
+    }
+
+    .call-inner {
+      margin: 10px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 15px;
+    }
+
+    .call-inner a {
+      margin-left: 6px;
+      font-size: 18px;
+      text-decoration: none;
+    }
+
+    .call-title {
+      display: block;
+      width: 100%;
+      background-color: #FFE0DD;
+      padding: 15px 0;
+      margin: 0;
+      font-weight: bold;
+      font-size: 18px;
+      text-align: center;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .contact-button {
+      background-color: #f9d9d9;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .close-btn{
+        background-color: #e7e7e7;
+        padding: 10px;
+        margin: 0px 20px 20px;
+    }
+
+    .line{
+        width: 100%;
+        height: 1px;
+        background-color: #e7e7e7;
+        margin: 5px auto;
+    }
+</style>
+
+<!-- JavaScript -->
+<script>
+    const modal = document.getElementById("contactModal");
+    const btn = document.getElementById("contactBtn");
+
+    btn.onclick = () => {
+      modal.style.display = "block";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    // 모달 밖 클릭 시 닫기
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+</script>
+
+
+</div>
+</html>

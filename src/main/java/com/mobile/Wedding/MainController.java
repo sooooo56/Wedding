@@ -26,4 +26,9 @@ public class MainController {
         return "location";
     }
 
+    @GetMapping("/call")
+    public String call(){
+        return "call";
+    }
+
 }
