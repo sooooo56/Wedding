@@ -3,6 +3,14 @@ body{
 	font-weight : 300;
 	}
 
+/* 공통 */
+.title{
+  font-family: "Italianno", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
+}
+
 /* 기본 레이아웃 */
 .common-body{
     max-width: 600px;
@@ -76,7 +84,6 @@ body{
 
 
   /* 공통 모달 스타일 */
-
   .modal {
     position: fixed;
     inset: 0;
@@ -131,7 +138,7 @@ body{
     color: #444;
   }
 
-  /*  [1] 작성하기 모달 스타일 */
+  /*  작성하기 모달 스타일 */
   #writeModal .modal-form {
     padding: 16px;
     display: flex;
@@ -172,7 +179,7 @@ body{
   }
 
 
-  /* [2] 삭제(비밀번호 확인) 모달 스타일 */
+  /* 삭제(비밀번호 확인) 모달 스타일 */
 
   #deleteModal .modal-header {
     /* 재사용이므로 별도 지정 없이 동일 */

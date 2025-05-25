@@ -21,13 +21,18 @@ public class componentsController {
         return "components/call";
     }
 
-    @GetMapping("/info")
-    public String info(){
-        return "components/info";
-    }
-
     @GetMapping("/date")
     public String date(){
         return "components/date";
+    }
+
+    @GetMapping("/gallery")
+    public String gallery(){
+        return "components/gallery";
+    }
+
+    @GetMapping("/footer")
+    public String footer(){
+        return "components/footer";
     }
 }

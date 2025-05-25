@@ -34,11 +34,6 @@
           width: 20px;
           height: 20px;
         }
-        h2 {
-          font-family: 'Nanum Pen Script', cursive;
-          font-size: 32px;
-          margin-bottom: 0;
-        }
         .section-title {
           font-size: 20px;
           font-weight: bold;
@@ -48,23 +43,32 @@
         .cont{
             display:none;
         }
+
+        .root_daum_roughmap_landing{
+            width: 90%;
+        }
+
+        .location-txt{
+            margin-bottom:50px;
+        }
     </style>
     <!--카카오 지도 SDK -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=여기에_카카오_API_키를_입력하세요"></script>
 
     <div class="common-body">
-        <h2>Location</h2>
-        <p>시그니엘 서울<br>서울 송파구 올림픽로 300</p>
+        <div class="title">Location</div>
+        <div class="location-txt">
+            <p>시그니엘 서울</p>
+            <p>서울 송파구 올림픽로 300</p>
+        </div>
 
         <!--  지도 -->
-        <!-- * 카카오맵 - 지도퍼가기 -->
-        <!-- 1. 지도 노드 -->
         <div class="map-body">
           <div id="daumRoughmapContainer1748006199407" class="root_daum_roughmap root_daum_roughmap_landing" style="margin:0 auto;" ></div>
           <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
         </div>
 
-        <!-- 3. 실행 스크립트 -->
+        <!-- 실행 스크립트 -->
         <script charset="UTF-8">
             new daum.roughmap.Lander({
                 "timestamp" : "1748006199407",
