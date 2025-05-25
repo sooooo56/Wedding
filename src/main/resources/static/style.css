@@ -1,14 +1,17 @@
-<style>
-
 body{
 	font-family : Pretendard;
 	font-weight : 300;
 	}
 
-  /* 기본 레이아웃 */
-  .guest-container {
+/* 기본 레이아웃 */
+.common-body{
     max-width: 600px;
     margin: 0 auto;
+    text-align: center;
+}
+
+  /* 방명록 */
+  .guest-container {
     background-color: #FFF3F3;
     padding: 50px 20px;
   }
@@ -40,6 +43,7 @@ body{
   .guest-text {
     margin-top: 8px;
     font-size: 14px;
+    text-align: left;
   }
 
   .delete-btn {
