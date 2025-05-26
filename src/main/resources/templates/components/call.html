@@ -1,5 +1,5 @@
-<html layout:decorate="~{layout}">
-<div layout:fragment="content">
+
+<div th:fragment="call-section">
 
 
 <div class="call-container common-body">
@@ -15,8 +15,8 @@
 </div>
 
 <!-- 연락 모달 -->
-<div id="contactModal" class="modal">
-    <div class="modal-content">
+<div id="contactModal" class="call-modal">
+    <div class="call-modal-content">
         <h3 class="call-title">연락하기</h3>
         <ul class="call-list">
             <li class="call-inner">
@@ -71,103 +71,6 @@
     </div>
 </div>
 
-<!-- 스타일 -->
-<style>
-
-    .call-container{
-        max-width: 600px;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* 어두운 배경 */
-      transition: all 0.3s ease;
-    }
-
-    .modal-content {
-      margin: 100px auto;
-      width: 320px;
-      border-radius: 16px;
-      text-align: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* 부드러운 그림자 */
-      font-family: 'Pretendard', sans-serif;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-
-    .call-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      padding: 10px 20px;
-    }
-
-    .call-inner {
-      margin: 10px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 15px;
-    }
-
-    .call-inner a {
-      margin-left: 6px;
-      font-size: 18px;
-      text-decoration: none;
-    }
-
-    .call-title {
-      display: block;
-      width: 100%;
-      background-color: #FFE0DD;
-      padding: 15px 0;
-      margin: 0;
-      font-weight: bold;
-      font-size: 18px;
-      text-align: center;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-    }
-
-    .contact-button {
-      background-color: #f9d9d9;
-      padding: 5px 40px;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      margin-top: 30px;
-    }
-
-    .close-btn{
-        background-color: #e7e7e7;
-        padding: 10px;
-        margin: 0px 20px 20px;
-    }
-
-    .line{
-        width: 100%;
-        height: 1px;
-        background-color: #e7e7e7;
-        margin: 5px auto;
-    }
-
-    .name-txt{
-      margin-top: 30px;
-    }
-
-    .wedding-img{
-      margin: 0 auto;
-    }
-</style>
 
 <!-- JavaScript -->
 <script>
@@ -192,4 +95,3 @@
 
 
 </div>
-</html>

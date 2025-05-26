@@ -1,7 +1,12 @@
 
 <html layout:decorate="~{layout}">
-<div layout:fragment="content" class="main-container">
+<div layout:fragment="content">
 
+    <style>
+
+    </style>
+
+    <div class="common-body">
     <div class="container mg-50">
         <div class="title">Seojun & Haeun</div>
         <div class="main-img">
@@ -36,34 +41,14 @@
     </div>
 
 
+    <div th:replace="components/call :: call-section"></div>
+    <div th:replace="components/date :: date-section"></div>
+    <div th:replace="components/gallery :: gallery-section"></div>
+    <div th:replace="components/location :: location-section"></div>
+    <div th:replace="components/account :: account-section"></div>
+<!--    <div th:replace="components/guestbook :: guestbook-section"></div>-->
 
-    <style>
-        .mg-50{
-            margin: 50px 0;
-        }
-        .main-container{
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-            font-family: 'Chosunilbo_myungjo';
-            font-weight: normal;
-        }
-
-        .main-img img{
-            margin: 50px auto 30px;
-        }
-
-        .date{
-            font-size: 30px;
-        }
-
-        .name{
-            margin-bottom: 30px;
-        }
-    </style>
-
-    <a th:href="@{/write}">답변하기</a>
-    <a th:href="@{/guest}">guestbook</a>
+    </div>
 
 </div>
 </html>

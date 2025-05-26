@@ -1,7 +1,3 @@
-body{
-	font-family : Pretendard;
-	font-weight : 300;
-	}
 
 /* 공통 */
 .title{
@@ -16,7 +12,26 @@ body{
     max-width: 600px;
     margin: 0 auto;
     text-align: center;
+    font-family: 'Chosunilbo_myungjo';
+    font-weight: normal;
 }
+
+/* main */
+    .mg-50{
+        margin: 50px 0;
+    }
+
+    .main-img img{
+        margin: 50px auto 30px;
+    }
+
+    .date{
+        font-size: 30px;
+    }
+
+    .name{
+        margin-bottom: 30px;
+    }
 
   /* 방명록 */
   .guest-container {
@@ -239,3 +254,26 @@ body{
     padding: 10px;
 }
 
+/* 달력 */
+    .d-day-box {
+      font-family: "Pretendard", sans-serif;
+      padding: 30px;
+    }
+
+    .d-day-result {
+      font-size: 40px;
+      font-weight: bold;
+      font-family: "Italianno", cursive;
+    }
+
+    .d-day-date {
+      font-size: 16px;
+      margin-top: 10px;
+      text-align: left;
+    }
+
+    .day-txt{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
