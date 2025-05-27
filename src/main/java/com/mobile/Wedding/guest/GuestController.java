@@ -58,7 +58,7 @@ public class GuestController {
         }
 
         guestService.create(guest.getName(), guest.getPw(), guest.getTxt());
-        return "redirect:/guest"; // 질문 저장 후 /guest로 이동
+        return "redirect:/SeojunHaeun"; // 질문 저장 후 /guest로 이동
         // TODO 앵커포인트 설정 > 작성한 방명록 표시
     }
 
