@@ -1,5 +1,11 @@
 /* 계좌 */
 
+.account-body{
+    font-family: 'Pretendard', sans-serif;
+    width: 90%;
+    margin: 0 auto;
+}
+
 .con-blank{
   margin-bottom: 20px;
   padding-bottom: 20px;
@@ -11,14 +17,13 @@
   margin: 20px auto;
   border-radius: 8px;
   overflow: hidden;
-  font-family: sans-serif;
 }
 
 .accordion-header {
   background: #ffe6ea;
   padding: 14px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 500;
   display: flex;
   justify-content: space-between;
 }
