@@ -1,8 +1,4 @@
 /* call */
- .call-container{
-        max-width: 600px;
-    }
-
     .call-modal {
       display: none;
       position: fixed;
@@ -21,6 +17,7 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* 부드러운 그림자 */
       font-family: 'Pretendard', sans-serif;
       animation: fadeIn 0.3s ease;
+      background-color: #fff;
     }
 
     @keyframes fadeIn {
