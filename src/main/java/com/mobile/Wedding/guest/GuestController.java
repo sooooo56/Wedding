@@ -40,7 +40,7 @@ public class GuestController {
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
 
-        return "/components/guestbook";
+        return "SeojunHaeun";
     }
 
     // 방명록 작성
@@ -51,15 +51,15 @@ public class GuestController {
     }
 
     @PostMapping("/write")
-    public String questionCreate(@Valid @ModelAttribute("write") Guest guest, BindingResult bindingResult) {
+    @ResponseBody
+    public Map<String, Object> write(@RequestBody Map<String, String> body) {
+        String name = body.get("name");
+        String pw = body.get("pw");
+        String txt = body.get("txt");
 
-        if (bindingResult.hasErrors()){
-            return "guestwrite";
-        }
+        guestService.saveGuest(name, pw, txt);
 
-        guestService.create(guest.getName(), guest.getPw(), guest.getTxt());
-        return "redirect:/SeojunHaeun"; // 질문 저장 후 /guest로 이동
-        // TODO 앵커포인트 설정 > 작성한 방명록 표시
+        return Map.of("success", true);
     }
 
     // 방명록 삭제
@@ -75,6 +75,19 @@ public class GuestController {
         response.put("success", deleted);
         return response;
     }
+
+    @GetMapping("/guest/fetch")
+    @ResponseBody
+    public Map<String, Object> guestbookFetch(@RequestParam(value = "page", defaultValue = "1") int page) {
+        Pageable pageable = PageRequest.of(page - 1, 4);
+        Page<Guest> guestPage = guestService.getPageList(pageable);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("guestList", guestPage.getContent());
+        return response;
+    }
+
+
 
 
 }

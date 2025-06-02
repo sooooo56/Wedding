@@ -3,6 +3,7 @@ package com.mobile.Wedding.guest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -32,20 +33,7 @@ public class GuestService {
         this.guestRepository.save(guest);
     }
 
-
-    // 삭제
-//    public boolean delete(int id, String pw) {
-//        Optional<Guest> guestOpt = guestRepository.findById(id);
-//        if (guestOpt.isPresent()) {
-//            Guest guest = guestOpt.get();
-//            if (guest.getPw().equals(pw)) {
-//                guestRepository.delete(guest);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
+    //삭제
     public boolean delete(int id, String pw) {
         Optional<Guest> guestOpt = guestRepository.findById(id);
         if (guestOpt.isPresent() && guestOpt.get().getPw().equals(pw)) {
@@ -55,8 +43,29 @@ public class GuestService {
         return false;
     }
 
+    public void deleteById(int id) {
+        guestRepository.deleteById(id);
+    }
+
     public Page<Guest> getPageList(Pageable pageable) {
         return guestRepository.findAllByOrderByCreateDateDesc(pageable);
     }
+
+    public List<Guest> findAll() {
+        return guestRepository.findAll(Sort.by(Sort.Direction.DESC, "createDate"));
+    }
+
+
+    public void saveGuest(String name, String pw, String txt) {
+        Guest guest = Guest.builder()
+                .name(name)
+                .pw(pw)
+                .txt(txt)
+                .createDate(LocalDateTime.now())
+                .build();
+
+        guestRepository.save(guest);
+    }
+
 
 }

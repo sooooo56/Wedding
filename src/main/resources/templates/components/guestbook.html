@@ -130,6 +130,72 @@
               document.getElementById('pwError').classList.remove('hidden');
             }
           });
+
+          async function loadGuestList() {
+    const res = await fetch('/guest/fetch');
+    const data = await res.json();
+
+    const container = document.querySelector('.guest-list');
+    container.innerHTML = ''; // 기존 목록 제거
+
+    data.guestList.forEach(guest => {
+      const item = document.createElement('div');
+      item.className = 'guest-item';
+      item.innerHTML = `
+        <div class="guestTxt">
+          <div class="guest-name">${guest.name}</div>
+          <div class="guestTxt2">
+            <div class="guest-date">${guest.createDate.slice(0, 10)}</div>
+            <button class="delete-btn" data-id="${guest.id}">X</button>
+          </div>
+        </div>
+        <div class="guest-text">${guest.txt}</div>
+      `;
+      container.appendChild(item);
+    });
+
+    // 삭제 버튼 이벤트 다시 바인딩
+    bindDeleteEvents();
+  }
+
+  async function postGuest(form) {
+    const formData = new FormData(form);
+    const plain = Object.fromEntries(formData.entries());
+
+    const res = await fetch('/write', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(plain)
+    });
+
+    if (res.ok) {
+      closeModal(form);
+      await loadGuestList();
+    } else {
+      alert('작성 실패');
+    }
+  }
+
+  function bindDeleteEvents() {
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentDeleteId = btn.dataset.id;
+        document.getElementById('deletePw').value = '';
+        document.getElementById('pwError').classList.add('hidden');
+        openModal('deleteModal');
+      });
+    });
+  }
+
+  // 작성 모달 전송
+  const writeForm = document.querySelector('.modal-form');
+  writeForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    await postGuest(e.target);
+  });
+
+  // 최초 로딩 시 리스트 가져오기
+  loadGuestList();
         });
     </script>
 
