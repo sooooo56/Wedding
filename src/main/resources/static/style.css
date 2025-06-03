@@ -39,6 +39,7 @@
     background-color: #FFF3F3;
     padding: 50px 20px;
     font-family: 'Pretendard', sans-serif;
+    margin-top: 50px;
   }
 
   .guest-list {
@@ -253,6 +254,12 @@
 
 .pagination{
     justify-content: center;
+    color: #636363;
+}
+
+.pagination .active{
+  color: #ffada5;
+  font-weight: bold;
 }
 
 .pageNum{

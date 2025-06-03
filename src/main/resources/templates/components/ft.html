@@ -1,0 +1,60 @@
+<div th:fragment="ft-section">
+
+    <div class="common-body ft-container">
+            <div class="footer-image">
+              <img src="/img/ft_img.jpg" alt="footer image" />
+              <p class="happy-tt">행복하게 잘 살겠습니다</p>
+            </div>
+          
+            <div class="footer-buttons">
+              <button id="kakaoShareBtn">
+                <span class="btn-icon kakao"></span> 카카오톡 공유하기
+              </button>
+              <button id="copyLinkBtn">
+                <span class="btn-icon link"></span> 링크 복사하기
+              </button>
+            </div>
+          
+            <p class="copyright">Copyright 2025. sohee All Rights Reserved.</p>
+            
+    </div>
+
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        // Kakao SDK 초기화
+        Kakao.init('여기에_자신의_JavaScript_키');
+
+        document.getElementById('kakaoShareBtn').addEventListener('click', function () {
+          Kakao.Link.sendDefault({
+            objectType: 'feed',
+            content: {
+              title: '서준 ♥ 하은 모바일 청첩장',
+              description: '행복하게 잘 살겠습니다',
+              imageUrl: location.origin + '/img/ft_img.png',
+              link: {
+                mobileWebUrl: location.href,
+                webUrl: location.href
+              }
+            },
+            buttons: [
+              {
+                title: '청첩장 보기',
+                link: {
+                  mobileWebUrl: location.href,
+                  webUrl: location.href
+                }
+              }
+            ]
+          });
+        });
+
+        // 링크 복사
+        document.getElementById('copyLinkBtn').addEventListener('click', function () {
+          navigator.clipboard.writeText(location.href)
+            .then(() => alert('링크가 복사되었습니다!'))
+            .catch(() => alert('복사 실패!'));
+        });
+    </script>
+
+
+</div>

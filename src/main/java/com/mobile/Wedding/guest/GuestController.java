@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,6 +44,21 @@ public class GuestController {
         return "SeojunHaeun";
     }
 
+    // 비동기화 방명록 리스트
+    @GetMapping("/guest/fetch")
+    @ResponseBody
+    public Map<String, Object> fetchGuestList(@RequestParam(defaultValue = "1") int page) {
+        int size = 4;
+        Page<Guest> guestPage = guestService.getGuestList(PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "createDate")));
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("guestList", guestPage.getContent());
+        response.put("currentPage", page);
+        response.put("totalPages", guestPage.getTotalPages());
+
+        return response;
+    }
+
     // 방명록 작성
     @GetMapping("/write")
     public String guestCreate(Model model) {
@@ -50,6 +66,7 @@ public class GuestController {
         return "guestwrite";
     }
 
+    // 비동기화 작성
     @PostMapping("/write")
     @ResponseBody
     public Map<String, Object> write(@RequestBody Map<String, String> body) {
@@ -73,17 +90,6 @@ public class GuestController {
 
         Map<String, Object> response = new HashMap<>();
         response.put("success", deleted);
-        return response;
-    }
-
-    @GetMapping("/guest/fetch")
-    @ResponseBody
-    public Map<String, Object> guestbookFetch(@RequestParam(value = "page", defaultValue = "1") int page) {
-        Pageable pageable = PageRequest.of(page - 1, 4);
-        Page<Guest> guestPage = guestService.getPageList(pageable);
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("guestList", guestPage.getContent());
         return response;
     }
 

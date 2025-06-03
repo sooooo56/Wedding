@@ -1,6 +1,8 @@
 <div th:fragment="guestbook-section">
 
-    <div class="guest-container common-body mg-50">
+    <div class="guest-container common-body">
+
+        <div class="title">Guestbook</div>
 
         <!-- 방명록 리스트 (최대 4개) -->
         <div class="guest-list">
@@ -22,10 +24,10 @@
         <div class="pagination">
             <ul class="pageNum">
                 <li th:if="${startPage > 1}">
-                    <a th:href="@{/guest(page=1)}">처음</a>
+                    <a th:href="@{/guest(page=1)}">&lt;&lt;</a>
                 </li>
                 <li th:if="${currentPage > 1}">
-                    <a th:href="@{/guest(page=${currentPage - 1})}">이전</a>
+                    <a th:href="@{/guest(page=${currentPage - 1})}">&lt;</a>
                 </li>
 
                 <li th:each="pageNum : ${#numbers.sequence(startPage, endPage)}"
@@ -34,10 +36,10 @@
                 </li>
 
                 <li th:if="${currentPage < totalPages}">
-                    <a th:href="@{/guest(page=${currentPage + 1})}">다음</a>
+                    <a th:href="@{/guest(page=${currentPage + 1})}">&gt;</a>
                 </li>
                 <li th:if="${endPage < totalPages}">
-                    <a th:href="@{/guest(page=${totalPages})}">끝</a>
+                    <a th:href="@{/guest(page=${totalPages})}">&gt;&gt;</a>
                 </li>
             </ul>
         </div>
@@ -79,10 +81,9 @@
 
 
 
-    <!-- 삭제 모달 -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-          // 유틸: 모달 열고 닫기
+          // ------------------- 공통 모달 처리 -------------------
           function openModal(id) {
             document.getElementById(id).classList.remove('hidden');
           }
@@ -91,27 +92,27 @@
             el.closest('.modal').classList.add('hidden');
           }
 
-          // 모든 닫기 버튼에 이벤트 바인딩
           document.querySelectorAll('[data-close]').forEach(btn => {
             btn.addEventListener('click', () => closeModal(btn));
           });
 
-          // 작성하기 모달 열기
           document.getElementById('openWriteModal').addEventListener('click', () => {
             openModal('writeModal');
           });
 
-          // 삭제 관련
+          // ------------------- 삭제 기능 -------------------
           let currentDeleteId = null;
 
-          document.querySelectorAll('.delete-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-              currentDeleteId = btn.dataset.id;
-              document.getElementById('deletePw').value = '';
-              document.getElementById('pwError').classList.add('hidden');
-              openModal('deleteModal');
+          function bindDeleteEvents() {
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+              btn.addEventListener('click', () => {
+                currentDeleteId = btn.dataset.id;
+                document.getElementById('deletePw').value = '';
+                document.getElementById('pwError').classList.add('hidden');
+                openModal('deleteModal');
+              });
             });
-          });
+          }
 
           document.getElementById('confirmDelete').addEventListener('click', async () => {
             const pw = document.getElementById('deletePw').value;
@@ -124,80 +125,101 @@
             const result = await res.json();
 
             if (result.success) {
-              document.querySelector(`[data-id='${currentDeleteId}']`).closest('div').remove();
+              await loadGuestList(currentPage); // 현재 페이지 다시 불러오기
               closeModal(document.getElementById('deleteModal'));
             } else {
               document.getElementById('pwError').classList.remove('hidden');
             }
           });
 
-          async function loadGuestList() {
-    const res = await fetch('/guest/fetch');
-    const data = await res.json();
+          // ------------------- 작성 기능 -------------------
+          async function postGuest(form) {
+            const formData = new FormData(form);
+            const plain = Object.fromEntries(formData.entries());
 
-    const container = document.querySelector('.guest-list');
-    container.innerHTML = ''; // 기존 목록 제거
+            const res = await fetch('/write', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(plain)
+            });
 
-    data.guestList.forEach(guest => {
-      const item = document.createElement('div');
-      item.className = 'guest-item';
-      item.innerHTML = `
-        <div class="guestTxt">
-          <div class="guest-name">${guest.name}</div>
-          <div class="guestTxt2">
-            <div class="guest-date">${guest.createDate.slice(0, 10)}</div>
-            <button class="delete-btn" data-id="${guest.id}">X</button>
-          </div>
-        </div>
-        <div class="guest-text">${guest.txt}</div>
-      `;
-      container.appendChild(item);
-    });
+            if (res.ok) {
+              closeModal(form);
+              await loadGuestList(1); // 작성 후 1페이지로 이동
+            } else {
+              alert('작성 실패');
+            }
+          }
 
-    // 삭제 버튼 이벤트 다시 바인딩
-    bindDeleteEvents();
-  }
+          const writeForm = document.querySelector('.modal-form');
+          writeForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await postGuest(e.target);
+          });
 
-  async function postGuest(form) {
-    const formData = new FormData(form);
-    const plain = Object.fromEntries(formData.entries());
+          // ------------------- 페이징 처리 -------------------
+          let currentPage = 1;
 
-    const res = await fetch('/write', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(plain)
-    });
+          async function loadGuestList(page = 1) {
+            currentPage = page;
 
-    if (res.ok) {
-      closeModal(form);
-      await loadGuestList();
-    } else {
-      alert('작성 실패');
-    }
-  }
+            const res = await fetch(`/guest/fetch?page=${page}`);
+            const data = await res.json();
 
-  function bindDeleteEvents() {
-    document.querySelectorAll('.delete-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        currentDeleteId = btn.dataset.id;
-        document.getElementById('deletePw').value = '';
-        document.getElementById('pwError').classList.add('hidden');
-        openModal('deleteModal');
-      });
-    });
-  }
+            const container = document.querySelector('.guest-list');
+            container.innerHTML = '';
+            data.guestList.forEach(guest => {
+              const item = document.createElement('div');
+              item.className = 'guest-item';
+              item.innerHTML = `
+                <div class="guestTxt">
+                  <div class="guest-name">${guest.name}</div>
+                  <div class="guestTxt2">
+                    <div class="guest-date">${guest.createDate.slice(0, 10)}</div>
+                    <button class="delete-btn" data-id="${guest.id}">X</button>
+                  </div>
+                </div>
+                <div class="guest-text">${guest.txt}</div>
+              `;
+              container.appendChild(item);
+            });
 
-  // 작성 모달 전송
-  const writeForm = document.querySelector('.modal-form');
-  writeForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    await postGuest(e.target);
-  });
+            // 페이지 번호 구성
+            const pagination = document.querySelector('.pagination .pageNum');
+            pagination.innerHTML = '';
+            if (data.currentPage > 1) {
+              pagination.innerHTML += `<li><a href="#" data-page="1">처음</a></li>`;
+              pagination.innerHTML += `<li><a href="#" data-page="${data.currentPage - 1}">이전</a></li>`;
+            }
 
-  // 최초 로딩 시 리스트 가져오기
-  loadGuestList();
+            for (let i = 1; i <= data.totalPages; i++) {
+              pagination.innerHTML += `
+                <li class="${i === data.currentPage ? 'active' : ''}">
+                  <a href="#" data-page="${i}">${i}</a>
+                </li>
+              `;
+            }
+
+            if (data.currentPage < data.totalPages) {
+              pagination.innerHTML += `<li><a href="#" data-page="${data.currentPage + 1}">다음</a></li>`;
+              pagination.innerHTML += `<li><a href="#" data-page="${data.totalPages}">끝</a></li>`;
+            }
+
+            bindDeleteEvents();
+          }
+
+          document.querySelector('.pagination .pageNum').addEventListener('click', async (e) => {
+            if (e.target.tagName === 'A' && e.target.dataset.page) {
+              e.preventDefault();
+              await loadGuestList(parseInt(e.target.dataset.page));
+            }
+          });
+
+          // ------------------- 초기 실행 -------------------
+          loadGuestList(); // 1페이지로 시작
         });
     </script>
+
 
 
 </div>

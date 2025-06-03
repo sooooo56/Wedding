@@ -31,8 +31,8 @@ public class componentsController {
         return "components/gallery";
     }
 
-    @GetMapping("/footer")
+    @GetMapping("/ft")
     public String footer(){
-        return "components/footer";
+        return "components/ft";
     }
 }

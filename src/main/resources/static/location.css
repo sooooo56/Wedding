@@ -48,3 +48,9 @@
         font-family: 'Chosunilbo_myungjo';
         font-weight: normal;
     }
+
+    .location-tt{
+      text-align: left;
+      padding: 0 20px;
+      font-family: 'Pretendard', sans-serif;
+    }

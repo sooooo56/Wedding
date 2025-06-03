@@ -17,12 +17,12 @@ public class GuestService {
     private final GuestRepository guestRepository;
 
     // 리스트
-    public List<Guest> getList(){
-        return this.guestRepository.findAll();
+    public Page<Guest> getGuestList(Pageable pageable) {
+        return guestRepository.findAll(pageable);
     }
 
     // 방명록 작성
-    public void create(String name, String pw, String txt) {
+    public void saveGuest(String name, String pw, String txt) {
         Guest guest = Guest.builder()
                 .name(name)
                 .pw(pw)
@@ -30,7 +30,7 @@ public class GuestService {
                 .createDate(LocalDateTime.now())
                 .build();
 
-        this.guestRepository.save(guest);
+        guestRepository.save(guest);
     }
 
     //삭제
@@ -43,29 +43,15 @@ public class GuestService {
         return false;
     }
 
-    public void deleteById(int id) {
-        guestRepository.deleteById(id);
-    }
 
     public Page<Guest> getPageList(Pageable pageable) {
         return guestRepository.findAllByOrderByCreateDateDesc(pageable);
     }
 
-    public List<Guest> findAll() {
-        return guestRepository.findAll(Sort.by(Sort.Direction.DESC, "createDate"));
-    }
 
 
-    public void saveGuest(String name, String pw, String txt) {
-        Guest guest = Guest.builder()
-                .name(name)
-                .pw(pw)
-                .txt(txt)
-                .createDate(LocalDateTime.now())
-                .build();
 
-        guestRepository.save(guest);
-    }
+
 
 
 }

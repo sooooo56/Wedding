@@ -1,0 +1,76 @@
+
+  .ft-container{
+    margin-bottom: 50px;
+  }
+  .footer-image {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .footer-image img {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+  }
+
+    /* 이미지 위에 텍스트를 중앙 정렬 */
+    .footer-image .happy-tt {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 16px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* 더 잘 보이게 */
+      margin: 0;
+    }
+  
+  .footer-buttons {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-family: 'Pretendard', sans-serif;
+  }
+  
+  .footer-buttons button {
+    margin: 10px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    background-color: #f6f6f6;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .btn-icon.kakao {
+    width: 16px;
+    height: 16px;
+    background-color: #fae100;
+    border-radius: 50%;
+  }
+  
+  .btn-icon.link {
+    width: 16px;
+    height: 16px;
+    background-color: #ddd;
+    border-radius: 50%;
+  }
+  
+  button:hover {
+    background-color: #eaeaea;
+  }
+
+  .copyright{
+    color: #c3c3c3;
+    font-size: 13px;
+  }
+
+
+  
