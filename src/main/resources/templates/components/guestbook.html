@@ -188,8 +188,8 @@
             const pagination = document.querySelector('.pagination .pageNum');
             pagination.innerHTML = '';
             if (data.currentPage > 1) {
-              pagination.innerHTML += `<li><a href="#" data-page="1">처음</a></li>`;
-              pagination.innerHTML += `<li><a href="#" data-page="${data.currentPage - 1}">이전</a></li>`;
+              pagination.innerHTML += `<li><a href="#" data-page="1">&lt;&lt;</a></li>`;
+              pagination.innerHTML += `<li><a href="#" data-page="${data.currentPage - 1}">&lt;</a></li>`;
             }
 
             for (let i = 1; i <= data.totalPages; i++) {
@@ -201,8 +201,8 @@
             }
 
             if (data.currentPage < data.totalPages) {
-              pagination.innerHTML += `<li><a href="#" data-page="${data.currentPage + 1}">다음</a></li>`;
-              pagination.innerHTML += `<li><a href="#" data-page="${data.totalPages}">끝</a></li>`;
+              pagination.innerHTML += `<li><a href="#" data-page="${data.currentPage + 1}">&gt;</a></li>`;
+              pagination.innerHTML += `<li><a href="#" data-page="${data.totalPages}">&gt;&gt;</a></li>`;
             }
 
             bindDeleteEvents();

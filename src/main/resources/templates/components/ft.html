@@ -1,61 +1,63 @@
 <div th:fragment="ft-section">
-
     <div class="common-body ft-container">
-            <div class="footer-image">
-              <img src="/img/ft_img.jpg" alt="footer image" />
-              <p class="happy-tt">행복하게 잘 살겠습니다</p>
-            </div>
-          
-            <div class="footer-buttons">
-              <button id="kakaoShareBtn">
+        <div class="footer-image">
+            <img src="/img/ft_img.jpg" alt="footer image" />
+            <p class="happy-tt">행복하게 잘 살겠습니다</p>
+        </div>
+
+        <div class="footer-buttons">
+            <button id="kakaoShareBtn">
                 <span class="btn-icon kakao-share-btn"></span> 카카오톡 공유하기
-              </button>
-              <button id="copyLinkBtn">
+            </button>
+            <button id="copyLinkBtn">
                 <span class="btn-icon link"></span> 링크 복사하기
-              </button>
-            </div>
-          
-            <p class="copyright">Copyright 2025. sohee All Rights Reserved.</p>
-            
+            </button>
+        </div>
+
+        <p class="copyright">Copyright 2025. sohee All Rights Reserved.</p>
     </div>
 
+    <!-- Kakao SDK 불러오기 -->
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script><script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <script>
-        Kakao.init(''); // JavaScript 키
-        console.log(Kakao.isInitialized()); // 초기화 확인
 
-        document.getElementById('kakao-share-btn').addEventListener('click', function () {
-          Kakao.Share.sendDefault({
-            objectType: 'feed',
-            content: {
-              title: '서준♥하은 결혼식에 초대합니다',
-              description: '7월 26일 오후 1시 30분, 시그니엘 서울',
-              imageUrl: location.origin + '/img/slide5.jpg', // 절대 경로로 지정
-              link: {
-                mobileWebUrl: 'http://localhost:8080/',
-                webUrl: 'http://localhost:8080/'
-              }
-            },
-            buttons: [
-              {
-                title: '청첩장 보러가기',
+    <!-- 공유 기능 코드 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          Kakao.init('fab9c0e3024ca5b8e2f07f644af1b70b'); // JavaScript 키
+          console.log(Kakao.isInitialized());
+
+          document.getElementById('kakaoShareBtn').addEventListener('click', function () {
+            Kakao.Share.sendDefault({
+              objectType: 'feed',
+              content: {
+                title: '서준♥하은 결혼식에 초대합니다',
+                description: '7월 26일 오후 1시 30분, 시그니엘 서울',
+                imageUrl: 'location.origin' + '/img/slide5.jpg',
                 link: {
-                  mobileWebUrl: 'http://localhost:8080/',
-                  webUrl: 'http://localhost:8080/'
+                  mobileWebUrl: 'http://localhost:8080/SeojunHaeun',
+                  webUrl: 'http://localhost:8080/SeojunHaeun'
                 }
-              }
-            ]
+              },
+              buttons: [
+                {
+                  title: '청첩장 보러가기',
+                  link: {
+                    mobileWebUrl: 'http://localhost:8080/SeojunHaeun',
+                    webUrl: 'http://localhost:8080/SeojunHaeun'
+                  }
+                }
+              ],
+              // 카카오톡 미설치 시 카카오톡 설치 경로이동
+              installTalk: true,
+            });
+          });
+
+          // 링크 복사
+          document.getElementById('copyLinkBtn').addEventListener('click', function () {
+            navigator.clipboard.writeText(location.href)
+              .then(() => alert('링크가 복사되었습니다!'))
+              .catch(() => alert('복사 실패!'));
           });
         });
-
-        // 링크 복사
-        document.getElementById('copyLinkBtn').addEventListener('click', function () {
-          navigator.clipboard.writeText(location.href)
-            .then(() => alert('링크가 복사되었습니다!'))
-            .catch(() => alert('복사 실패!'));
-        });
     </script>
-
-
 </div>
