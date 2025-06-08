@@ -68,20 +68,20 @@
     const content = header.nextElementSibling;
     const icon = header.querySelector("span");
 
-    if (content.style.display === "block") {
-      content.style.display = "none";
-      icon.textContent = "▼";
-    } else {
-      content.style.display = "block";
-      icon.textContent = "▲";
-    }
+    const isOpen = content.classList.contains("open");
+
+    // toggle class
+    content.classList.toggle("open");
+
+    // 아이콘 변경
+    icon.textContent = isOpen ? "▼" : "▲";
   }
 
-  function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-      alert("계좌번호가 복사되었습니다.");
-    });
-  }
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("계좌번호가 복사되었습니다.");
+      });
+    }
 </script>
 
 </div>

@@ -29,12 +29,19 @@
 }
 
 .accordion-content {
-  display: none;
-  padding: 16px;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 16px;
   background: #fff;
   border: 1px solid #eee;
-  border-bottom-left-radius:10px;
+  border-top: none;
+  border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+.accordion-content.open {
+  padding: 16px;
+  max-height: 500px; /* 충분히 큰 값 (콘텐츠 최대 높이보다 크게 설정) */
 }
 
 .account-item {
